@@ -6,8 +6,8 @@
 --
 -- REQUIRES DHT, I2C, MATH, GPIO, TMR
 
-setting = 68	-- Target temperature
-plusMinus = 1	-- defines the width of target temperature window
+setting = 80	-- Target temperature
+plusMinus = .5	-- defines the width of target temperature window
 sensorPin = 4	-- DHT sensor on nodeMCU pin 4
 relayPin = 1	-- relay on nodeMCU pin 1
 turn="on"		-- action to be taken with relay @ relayPin
@@ -40,5 +40,5 @@ tmr.alarm(1, 30000, 1, function()
 	if (turn=="on") then gpio.write(relayPin,gpio.LOW)					
 		elseif (turn=="off") then gpio.write(relayPin,gpio.HIGH) end
 	-- Display current operation to console (if attached) 
-	print (temp.." Degrees F    Pin D"..relayPin.." is "..turn)
+	print (temp.." Degrees F    Pin D"..relayPin.." is "..turn..".  Target is "..setting.." +/- "..plusMinus)
 end)
